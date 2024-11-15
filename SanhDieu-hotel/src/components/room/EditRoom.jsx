@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const EditRoom = () => {
 
     const[room,setRoom] = useState({
-        photo: null,
+        photo: "",
         roomType: "",
         roomPrice: ""
         
@@ -33,7 +33,11 @@ const EditRoom = () => {
         const fetchRoom = async () =>{
             try {
                 const roomData = await getRoomById(roomId)
-                setRoom(roomData)
+                setRoom({
+                    roomType: roomData.roomType || "",
+                    roomPrice: roomData.roomPrice || "",
+                    photo: roomData.photo || ""
+                });
                 setImagePreview(roomData.photo)
             }catch(error) {
                 console.error(error)
@@ -42,9 +46,16 @@ const EditRoom = () => {
         fetchRoom()
     },[roomId])
     const handleSubmit = async(event) =>{
-        event.prevenDefault()
+        event.preventDefault()
 
         try {
+            const formData = new FormData();
+            formData.append("roomType", room.roomType);
+            formData.append("roomPrice", room.roomPrice);
+            if (room.photo) {
+                formData.append("photo", room.photo); // Thêm ảnh vào form nếu có
+            }
+
             const response = await updatedRoom(roomId,room)
             if(response.status === 200) {
                 setSuccessMessage("Room updated successfully!")
@@ -115,7 +126,7 @@ const EditRoom = () => {
                             />
                             {imagePreview && (
                                 <img
-                                src={`data:image/jpeg;base64,${imagePreview}`}
+                                src={imagePreview}
                                 alt='Room preview'
                                 style={{maxWidth: "400px",maxHeight:"400px"}}
                                 className='mt-3'
@@ -126,7 +137,7 @@ const EditRoom = () => {
                             <Link to={"/existing-rooms"} className="btn btn-outline-info ml-5">
                             back
                             </Link>
-                            <button className='btn btn-outline-warning'type='submit'>
+                            <button className='btn btn-outline-warning' type='submit'>
                                 Edit Room
                             </button>
                         </div>

@@ -3,7 +3,7 @@ import { getRoomTypes, addRoomType } from '../utils/ApiFunctions'
 import {useState} from 'react'
 
 const RoomTypeSelector = ({handleRoomInputChange,newRoom}) => {
-    const[roomTypes,setRoomTypes] = useState([])
+    const[roomTypes,setRoomTypes] = useState([""])
     const[showNewRoomTypeInput,setShowNewRoomTypesInput] = useState(false)
     const[newRoomType,setNewRoomTypes] = useState("")
     
@@ -25,8 +25,8 @@ const RoomTypeSelector = ({handleRoomInputChange,newRoom}) => {
 
                 // Cập nhật roomTypes với loại phòng mới vừa được thêm vào
                 setRoomTypes([...roomTypes, savedRoomType]);
-                setNewRoomType("");
-                setShowNewRoomTypeInput(false);
+                setNewRoomTypes("");
+                setShowNewRoomTypesInput(false);
             } catch (error) {
                 console.error("Failed to add room type", error);
             }

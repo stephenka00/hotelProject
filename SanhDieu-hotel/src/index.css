@@ -78,12 +78,19 @@ body {
 }
 
 .parallax{
-  background-image: url("");
+  background-image: url("./assets/Images/parall.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 70vh;
+}
+.header{
+  position: relative;
+  height: 150px;
+  background-size: cover;
+  background-position: center center;
+  background-image: url("./assets/Images/service1.jpg");
 }
 
 .parallax{
@@ -149,6 +156,7 @@ animated-texts h1{
 
 /* Header overlay */
 .overlay{
+  background-image: url("./assets/Images/overlay.jpg");
   position: absolute;
   top: 0;
   left: 0;
@@ -165,11 +173,14 @@ animated-texts h1{
   justify-content: flex-start;
 }
 
-
+.header-title{
+  color: #fff;
+  font-size: 4rem;
+  align-content: center;
+}
 
 /* The header banner */
 .header-baner{
-  background-image: url("");
   background-size: cover;
   background-position: center;
   position: relative;
